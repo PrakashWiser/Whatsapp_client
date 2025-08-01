@@ -82,6 +82,8 @@ export const useAuthStore = create((set, get) => ({
     const socket = io(CHAT_URL, {
       query: {
         userId: authUser._id,
+        transports: ["websocket"],
+        secure: true,
       },
     });
 
