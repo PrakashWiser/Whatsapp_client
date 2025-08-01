@@ -7,12 +7,13 @@ import { Users } from "lucide-react";
 const Sidebar = () => {
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
 
-    const { onlineUsers } = useAuthStore();
+    const { onlineUsers, isCheckingAuth, authUser } = useAuthStore();
     const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
     useEffect(() => {
+        if (isCheckingAuth || !authUser) return;
         getUsers();
-    }, [getUsers]);
+    }, [isCheckingAuth, authUser]);
 
     const filteredUsers = showOnlineOnly
         ? users?.filter((user) => onlineUsers?.includes(user._id))
@@ -77,7 +78,7 @@ const Sidebar = () => {
                     <div className="text-center text-zinc-500 py-4">No online users</div>
                 )}
             </div>
-        </aside> 
+        </aside>
     );
 };
 export default Sidebar;

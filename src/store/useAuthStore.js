@@ -4,6 +4,7 @@ import alert from "../lib/SwalAlert";
 import { io } from "socket.io-client";
 
 const CHAT_URL = import.meta.env.VITE_CHAT_URL;
+console.log(CHAT_URL);
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
